@@ -1,0 +1,93 @@
+﻿<Window x:Class="Cinema_TRIZBD.BookingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Бронирование мест" 
+        Height="600" 
+        Width="800"
+        WindowStartupLocation="CenterOwner"
+        Background="#1A1A1A">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Экран" 
+                   Foreground="White"
+                   FontSize="24"
+                   HorizontalAlignment="Center"
+                   Margin="0,20"/>
+
+        <!-- Зал с местами -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="SeatsItemsControl">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="{Binding Hall.Seats}" 
+                                    Rows="{Binding Hall.Rows}"
+                                    HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding SeatNumber}"
+                                Width="40"
+                                Height="40"
+                                Margin="5"
+                                Click="SeatButton_Click"
+                                IsEnabled="{Binding IsAvailable}">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                    <Setter Property="Background" Value="#7B2CBF"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsAvailable}" Value="False">
+                                            <Setter Property="Background" Value="#555555"/>
+                                            <Setter Property="Cursor" Value="No"/>
+                                        </DataTrigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#9D4EDD"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- Выбранное место -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
+            <TextBlock Text="{Binding SelectedSeatText}" 
+                Foreground="#9D4EDD" 
+                FontSize="18"
+                FontWeight="Bold"/>
+        </StackPanel>
+
+        <!-- Легенда и кнопка -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
+            <StackPanel Orientation="Horizontal" Margin="0,0,30,0">
+                <Rectangle Width="20" Height="20" Fill="#7B2CBF" Margin="0,0,5,0"/>
+                <TextBlock Text="Свободно" Foreground="White"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Rectangle Width="20" Height="20" Fill="#555555" Margin="0,0,5,0"/>
+                <TextBlock Text="Занято" Foreground="White"/>
+            </StackPanel>
+
+            <Button Content="Купить билет" 
+                    Background="#7B2CBF"
+                    Foreground="White"
+                    Margin="30,0,0,0"
+                    Padding="20,10"
+                    FontSize="16"
+                    
+                    Click="BuyButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

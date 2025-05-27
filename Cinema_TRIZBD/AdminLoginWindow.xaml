@@ -1,0 +1,87 @@
+﻿<Window x:Class="Cinema_TRIZBD.AdminLoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cinema_TRIZBD"
+        mc:Ignorable="d"
+        Title="Вход администратора | Кинотеатр Popcorn" 
+        Height="500" Width="600"
+        WindowStartupLocation="CenterOwner"
+        Background="Black">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <Border Grid.Row="0" Background="Red" Padding="15">
+            <TextBlock Text="Вход для администраторов" 
+                       FontSize="24" 
+                       FontWeight="Bold"
+                       FontFamily="Comic Sans MS"
+                       Foreground="{StaticResource TextBrush}"
+                       HorizontalAlignment="Center"/>
+        </Border>
+
+        <!-- Основное содержимое -->
+        <StackPanel Grid.Row="1" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center"
+                    Width="400">
+            <TextBlock Text="Email" 
+                       FontFamily="Comic Sans MS"
+                       HorizontalAlignment="Left"/>
+            <TextBox x:Name="emailTextBox"
+                     FontFamily="Comic Sans MS"
+                     BorderBrush="Red"
+                     Height="40"/>
+
+            <TextBlock Text="Пароль" 
+                       Margin="0 15 0 0"
+                       FontFamily="Comic Sans MS"
+                       HorizontalAlignment="Left"/>
+            <PasswordBox x:Name="passwordBox"
+                        FontFamily="Comic Sans MS"
+                         BorderBrush="Red"
+                        Height="40"/>
+
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center"
+                        Margin="0 30">
+                <Button Content="Войти" 
+                        Click="LoginButton_Click"
+                        Width="120"
+                        Height="40"
+                        Margin="0 0 20 0"
+                        Background="Red"
+                        />
+
+                <Button Content="Назад" 
+                        Click="BackButton_Click"
+                        Width="120"
+                        Height="40"
+                        Background="Red"
+                        />
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Подвал -->
+        <Border Grid.Row="2" Background="#222222" Padding="10">
+            <TextBlock Text="Только для авторизованного персонала" 
+                       HorizontalAlignment="Center"
+                       Foreground="#AAAAAA"
+                       FontFamily="Comic Sans MS"/>
+        </Border>
+    </Grid>
+</Window>
